@@ -1,0 +1,17 @@
+@startuml
+actor Aluno
+actor Bibliotecario
+participant "Sistema de Biblioteca" as Sistema
+participant "Empréstimo" as Emprestimo
+
+Aluno -> Sistema : Solicitar empréstimo
+Sistema -> Sistema : Verificar se o aluno atingiu o limite
+alt Limite não atingido
+  Sistema -> Bibliotecario : Solicitar confirmação do empréstimo
+  Bibliotecario -> Sistema : Confirmar empréstimo
+  Sistema -> Emprestimo : Registrar empréstimo
+  Sistema -> Aluno : Confirmar empréstimo realizado
+else Limite atingido
+  Sistema -> Al
+  end
+@enduml

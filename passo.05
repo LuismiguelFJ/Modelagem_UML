@@ -1,0 +1,19 @@
+@startuml
+start
+:Solicitar renovação de empréstimo;
+:Verificar se é a primeira renovação;
+if (É a primeira renovação?) then (sim)
+  :Verificar se há reservas no livro;
+  if (Há reservas?) then (sim)
+    :Notificar que o livro não pode ser renovado;
+    stop
+  else (não)
+    :Renovar empréstimo;
+    :Confirmar renovação ao aluno;
+    stop
+  endif
+else (não)
+  :Notificar que não é possível renovar;
+  stop
+endif
+@enduml

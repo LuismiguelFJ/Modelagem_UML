@@ -1,0 +1,13 @@
+@startuml
+[*] --> Disponivel
+
+Disponivel --> Emprestado : Livro emprestado
+Disponivel --> Reservado : Livro reservado
+
+Emprestado --> Disponivel : Livro devolvido
+Emprestado --> Reservado : Livro reservado (se não devolvido)
+
+Reservado --> Emprestado : Livro retirado
+Reservado --> Disponivel : Cancelamento de reserva
+
+@enduml
