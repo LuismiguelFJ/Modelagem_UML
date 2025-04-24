@@ -1,0 +1,45 @@
+@startuml
+!define RECTANGLE class
+
+package "Usuários" {
+  [Aluno/Professor] <<actor>>
+  [Bibliotecário] <<actor>>
+  [Administrador] <<actor>>
+}
+
+package "Sistema de Biblioteca" {
+  [Módulo de Autenticação] as Auth
+  [Gerenciamento de Usuários] as UserMgmt
+  [Catálogo de Livros] as Catalog
+  [Empréstimos e Devoluções] as Loan
+  [Reservas e Notificações] as Reservation
+  [Renovações] as Renewal
+  [Multas e Penalidades] as Penalty
+  [Relatórios e Estatísticas] as Reports
+}
+
+' Interações dos Atores
+[Aluno/Professor] --> Catalog : Buscar livros
+[Aluno/Professor] --> Reservation : Reservar livro
+[Aluno/Professor] --> Loan : Solicitar empréstimo
+[Aluno/Professor] --> Renewal : Solicitar renovação
+
+[Administrador] --> UserMgmt : Gerenciar cadastros
+[Administrador] --> UserMgmt : Bloquear usuário
+[Administrador] --> Reports : Gerar relatórios
+
+[Bibliotecário] --> Loan : Aprovar empréstimo
+[Bibliotecário] --> Loan : Registrar devolução
+
+' Relações entre componentes
+Catalog --> Reservation : Verificar reservas
+Reservation --> Penalty : Impedir renovação
+Loan --> Penalty : Aplicar multa por atraso
+Loan --> Reservation : Verificar reservas pendentes
+Renewal --> Reservation : Checar disponibilidade
+UserMgmt --> Penalty : Bloqueio por inadimplência
+Reports --> UserMgmt
+Reports --> Loan
+Reports --> Catalog
+
+@enduml

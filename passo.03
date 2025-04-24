@@ -1,0 +1,39 @@
+@startuml
+' Definição de classe base e heranças
+class Usuario {
+  - id: int
+  - nome: String
+  - email: String
+}
+
+class Aluno
+class Bibliotecario
+class Administrador
+
+Usuario <|-- Aluno
+Usuario <|-- Bibliotecario
+Usuario <|-- Administrador
+
+' Classe Livro
+class Livro {
+  - id: int
+  - titulo: String
+  - autor: String
+  - categoria: String
+  - disponivel: boolean
+}
+
+' Classe Empréstimo
+class Emprestimo {
+  - id: int
+  - dataEmprestimo: Date
+  - dataDevolucaoPrevista: Date
+  - dataDevolucaoReal: Date
+  - renovado: boolean
+}
+
+' Relações
+Emprestimo --> Livro : livro
+Emprestimo --> Usuario : usuario
+
+@enduml
